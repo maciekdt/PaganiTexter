@@ -1,6 +1,6 @@
 let fs = require("fs");
 const { resolve } = require("path");
-const FILE_NAME = "./asssets/users.json"
+const FILE_NAME = "./assets/users.json"
 let usersRepo = {
   get: function (resolve, reject) {
       fs.readFile(FILE_NAME, function (err, data) {
@@ -54,7 +54,7 @@ let usersRepo = {
       }
       else{
         let users = JSON.parse(data);
-        let user = JSON.parse(data).find(u => u.id == id);
+        let user = users.find(u => u.id == id);
         if(user){
           Object.assign(user, newData);
           fs.writeFile(FILE_NAME, JSON.stringify(users), function (err){
