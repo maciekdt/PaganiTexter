@@ -1,6 +1,7 @@
 let express = require('express');
 let app = express();
 let usersRepo = require("./repos/usersRepo")
+let errorHelper = require('./helpers/errorHelpers');
 
 let router = express.Router();
 app.use(express.json());
@@ -85,6 +86,12 @@ router.put('/users/:id', function(req, res, next){
 
 
 app.use('/api/', router);
+// Configure exception logger
+app.use(errorHelper.logErrors);
+// Configure client error handler
+app.use(errorHelper.clientErrorHandler);
+// Configure catch-all exception middleware last
+app.use(errorHelper.errorHandler);
 
 var server = app.listen(5000, function () {
   console.log('Node server is running on http://localhost:5000..');

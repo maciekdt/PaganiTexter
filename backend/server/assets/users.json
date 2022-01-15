@@ -1,1 +1,32 @@
-[{"id":1,"name":"FakeUser1","email":"fakeuser1@gmail.com","password":"password"},{"id":2,"name":"FakeUser2","email":"fakeuser2@gmail.com","password":"password"},{"id":3,"name":"FakeUser3","email":"fakeuser3@gmail.com","password":"password"},{"id":4,"name":"FakeUser4","email":"fakeuser4@gmail.com","password":"password"},{"id":5,"name":"FakeUser5","email":"fakeuser5@gmail.com","password":"password"}]
+[
+    {
+        "id": 1,
+        "name": "FakeUser1",
+        "email": "fakeuser1@gmail.com",
+        "password": "password"
+    },
+    {
+        "id": 2,
+        "name": "FakeUser2",
+        "email": "fakeuser2@gmail.com",
+        "password": "password"
+    },
+    {
+        "id": 3,
+        "name": "FakeUser3",
+        "email": "fakeuser3@gmail.com",
+        "password": "password"
+    },
+    {
+        "id": 4,
+        "name": "FakeUser4",
+        "email": "fakeuser4@gmail.com",
+        "password": "password"
+    },
+    {
+        "id": 5,
+        "name": "FakeUser5",
+        "email": "fakeuser5@gmail.com",
+        "password": "password"
+    }
+]
