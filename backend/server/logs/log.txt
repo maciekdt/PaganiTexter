@@ -7,3 +7,9 @@ Exception Info: {"status":500,"statusText":"Internal Server Error","message":"EN
 Time/Date: 16:24:13 / 15.01.2022
 Exception Info: {"status":500,"statusText":"Internal Server Error","message":"ENOENT: no such file or directory, open 'C:\\Users\\maciek\\Documents\\PaganiTexter\\backend\\server\\asssets\\users.json'","error":{"errno":-4058,"call":"open","code":"INTERNAL_SERVER_ERROR","message":"ENOENT: no such file or directory, open 'C:\\Users\\maciek\\Documents\\PaganiTexter\\backend\\server\\asssets\\users.json'"},"requestInfo":{"hostname":"localhost","path":"/api/users/1"}}
 
+Time/Date: 17:39:13 / 16.01.2022
+Exception Info: {"status":500,"statusText":"Internal Server Error","message":"ENOENT: no such file or directory, open 'C:\\Users\\maciek\\Documents\\PaganiTexter\\backend\\server\\asssets\\users.json'","error":{"errno":-4058,"call":"open","code":"INTERNAL_SERVER_ERROR","message":"ENOENT: no such file or directory, open 'C:\\Users\\maciek\\Documents\\PaganiTexter\\backend\\server\\asssets\\users.json'"},"requestInfo":{"hostname":"localhost","path":"/api/users/1"}}
+
+Time/Date: 21:33:17 / 17.01.2022
+Exception Info: {"status":500,"statusText":"Internal Server Error","message":"The \"path\" argument must be of type string. Received undefined","error":{"code":"INTERNAL_SERVER_ERROR","message":"The \"path\" argument must be of type string. Received undefined"},"requestInfo":{"hostname":"localhost","path":"/api/users/10"}}
+

@@ -47,7 +47,7 @@ let usersRepo = {
   },
 
 
-  update: function(id, newData, resolv, reject){
+  update: function(id, newData, resolve, reject){
     fs.readFile(FILE_NAME, function(err, data){
       if(err){
         reject(err)
@@ -57,22 +57,21 @@ let usersRepo = {
         let user = users.find(u => u.id == id);
         if(user){
           Object.assign(user, newData);
-          fs.writeFile(FILE_NAME, JSON.stringify(users), function (err){
+          fs.writeFile(FILE_NAME+"1", JSON.stringify(users), function (err){
             if(err){
               reject(err);
             }
             else{
-              resolv(newData);
+              resolve(newData);
             }
           });
         }
-        //else{
-          //resolve(undefined);
-        //}
+        else{
+          resolve(user);
+        }
       }
     });
-  }   
+  }
 };
-
 
 module.exports = usersRepo;

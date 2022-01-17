@@ -10,7 +10,6 @@ app.use(express.json());
 router.get('/users', function (req, res, next) {
   usersRepo.get(function (data) {
     res.status(200).json({
-      "status": 200,
       "statusText": "OK",
       "message": "All users retrieved.",
       "data": data
@@ -25,7 +24,6 @@ router.get('/users/:id', function (req, res, next) {
   usersRepo.getById(req.params.id, function (data) {
     if (data) {
       res.status(200).json({
-        "status": 200,
         "statusText": "OK",
         "message": "Single user retrieved.",
         "data": data
@@ -33,7 +31,6 @@ router.get('/users/:id', function (req, res, next) {
     }
     else {
       res.status(404).send({
-        "status": 404,
         "statusText": "Not Found",
         "message": "The user '" + req.params.id + "' could not be found.",
         "error": {
@@ -50,7 +47,6 @@ router.get('/users/:id', function (req, res, next) {
 router.post('/users', function (req, res, next) {
   usersRepo.insert(req.body, function(data) {
     res.status(201).json({
-      "status": 201,
       "statusText": "Created",
       "message": "New user added.",
       "data": data
@@ -64,18 +60,19 @@ router.put('/users/:id', function(req, res, next){
   usersRepo.update(req.params.id, req.body, function(data){
     if(data){
       res.status(200).json({
-        "status": 200,
         "statusText": "Updated",
         "message": "User " + req.params.id + " updated.",
         "data": data
       });
     }
     else{
-      res.status(404).json({
-        "status": 404,
+      res.status(404).send({
         "statusText": "Not Found",
         "message": "User " + req.params.id + " could not be found.",
-        "data": data
+        "error": {
+          "code": "NOT_FOUND",
+          "message": "User '" + req.params.id + "' could not be found."
+        }
       });
     }
   }, function(err){
