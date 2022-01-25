@@ -1,3 +1,4 @@
+var debug = require('debug');
 let express = require('express');
 let app = express();
 let usersRepo = require("./repos/usersRepo")
@@ -81,7 +82,6 @@ router.put('/users/:id', function(req, res, next){
 });
 
 
-
 app.use('/api/', router);
 // Configure exception logger
 app.use(errorHelper.logErrors);
@@ -90,6 +90,20 @@ app.use(errorHelper.clientErrorHandler);
 // Configure catch-all exception middleware last
 app.use(errorHelper.errorHandler);
 
-var server = app.listen(5000, function () {
-  console.log('Node server is running on http://localhost:5000..');
-});
+app.set('port', process.env.PORT || 3000);
+
+exports.listen = function () {
+  console.log('listen on app '+app.get('port'))
+    server = app.listen(app.get('port'), function () {
+        console.log('run on app '+server.address().port)
+        debug('Express server listening on port ' + server.address().port);
+    });
+}
+
+exports.close = function () {
+    server.close(() => {
+        debug('Server stopped.');
+    });
+}
+console.log('Starting app ')
+this.listen();
