@@ -1,6 +1,7 @@
 let fs = require("fs");
 const { resolve } = require("path");
 const FILE_NAME = "./assets/users.json"
+
 let usersRepo = {
   get: function (resolve, reject) {
       fs.readFile(FILE_NAME, function (err, data) {
@@ -69,6 +70,22 @@ let usersRepo = {
         else{
           resolve(user);
         }
+      }
+    });
+  },
+
+
+  authorize: function(loginData, resolve, reject){
+    fs.readFile(FILE_NAME, function(err, data){
+      if(err){
+        reject(err)
+      }
+      else{
+        let users = JSON.parse(data);
+        let user = users.find(u => 
+          u.name == loginData.name  &&  u.password == loginData.pass);
+        if(user) resolve(true);
+        else resolve(false);
       }
     });
   }

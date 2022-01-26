@@ -28,5 +28,12 @@
         "name": "FakeUser5",
         "email": "fakeuser5@gmail.com",
         "password": "password"
+    },
+    {
+        "id": 69,
+        "name": "WojtekTyper",
+        "email": "wojt@gmail.com",
+        "password": "dupa"
     }
+    
 ]
