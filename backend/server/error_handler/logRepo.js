@@ -1,6 +1,6 @@
 let fs = require('fs');
 
-const FILE_NAME = './error_handler/log.txt';
+const FILE_NAME = './logs/log.txt';
 
 let logRepo = {
   write: function (data, resolve, reject) {
