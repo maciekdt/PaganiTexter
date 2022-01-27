@@ -25,3 +25,24 @@ Exception Info: {"status":500,"statusText":"Internal Server Error","message":"EN
 Time/Date: 23:41:52 / 26.01.2022
 Exception Info: {"status":500,"statusText":"Internal Server Error","message":"ENOENT: no such file or directory, open 'C:\\Users\\maciek\\Documents\\PaganiTexter\\backend\\server\\asssets\\users.json'","error":{"errno":-4058,"call":"open","code":"INTERNAL_SERVER_ERROR","message":"ENOENT: no such file or directory, open 'C:\\Users\\maciek\\Documents\\PaganiTexter\\backend\\server\\asssets\\users.json'"},"requestInfo":{"hostname":"localhost","path":"/api/users/1"}}
 
+Time/Date: 00:12:55 / 27.01.2022
+Exception Info: {"status":500,"statusText":"Internal Server Error","error":{"code":"INTERNAL_SERVER_ERROR"},"requestInfo":{"hostname":"localhost","path":"/api/users/"}}
+
+Time/Date: 00:52:03 / 27.01.2022
+Exception Info: {"status":500,"statusText":"Internal Server Error","message":"ENOENT: no such file or directory, open 'C:\\Users\\maciek\\Documents\\PaganiTexter\\backend\\server\\asssets\\users.json'","error":{"errno":-4058,"call":"open","code":"INTERNAL_SERVER_ERROR","message":"ENOENT: no such file or directory, open 'C:\\Users\\maciek\\Documents\\PaganiTexter\\backend\\server\\asssets\\users.json'"},"requestInfo":{"hostname":"localhost","path":"/api/users/1"}}
+
+Time/Date: 00:57:06 / 27.01.2022
+Exception Info: {"status":500,"statusText":"Internal Server Error","message":"ENOENT: no such file or directory, open 'C:\\Users\\maciek\\Documents\\PaganiTexter\\backend\\server\\asssets\\users.json'","error":{"errno":-4058,"call":"open","code":"INTERNAL_SERVER_ERROR","message":"ENOENT: no such file or directory, open 'C:\\Users\\maciek\\Documents\\PaganiTexter\\backend\\server\\asssets\\users.json'"},"requestInfo":{"hostname":"localhost","path":"/api/users/1"}}
+
+Time/Date: 01:16:18 / 27.01.2022
+Exception Info: {"status":500,"statusText":"Internal Server Error","message":"usersRepo is not defined","error":{"code":"INTERNAL_SERVER_ERROR","message":"usersRepo is not defined"},"requestInfo":{"hostname":"localhost","path":"/api/users/1"}}
+
+Time/Date: 01:16:19 / 27.01.2022
+Exception Info: {"status":500,"statusText":"Internal Server Error","message":"usersRepo is not defined","error":{"code":"INTERNAL_SERVER_ERROR","message":"usersRepo is not defined"},"requestInfo":{"hostname":"localhost","path":"/api/users/1"}}
+
+Time/Date: 01:16:20 / 27.01.2022
+Exception Info: {"status":500,"statusText":"Internal Server Error","message":"usersRepo is not defined","error":{"code":"INTERNAL_SERVER_ERROR","message":"usersRepo is not defined"},"requestInfo":{"hostname":"localhost","path":"/api/users/1"}}
+
+Time/Date: 01:16:20 / 27.01.2022
+Exception Info: {"status":500,"statusText":"Internal Server Error","message":"usersRepo is not defined","error":{"code":"INTERNAL_SERVER_ERROR","message":"usersRepo is not defined"},"requestInfo":{"hostname":"localhost","path":"/api/users/1"}}
+
