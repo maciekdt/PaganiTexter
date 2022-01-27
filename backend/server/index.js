@@ -1,9 +1,9 @@
 let express = require('express');
 let app = express();
-let usersRepo = require("./repos/usersRepo");
-let errorHelper = require('./helpers/errorHelpers');
+let usersRepo = require("./users/usersRepo");
+let errorHelper = require('./error_handler/errorHelpers');
 let auth = require('basic-auth')
-let router = require("./devices/router")
+let usersRouter = require("./users/usersRouter")
 
 
 app.use(function(req, res, next){
@@ -24,7 +24,7 @@ app.use(function(req, res, next){
 
 
 app.use(express.json());
-app.use('/api/', router);
+app.use('/api/', usersRouter);
 app.use(errorHelper.logErrors);
 app.use(errorHelper.clientErrorHandler);
 app.use(errorHelper.errorHandler);

@@ -1,6 +1,6 @@
 let fs = require("fs");
 const { resolve } = require("path");
-const FILE_NAME = "./assets/users.json"
+const FILE_NAME = "./users/usersDb.json"
 
 let usersRepo = {
   get: function (resolve, reject) {

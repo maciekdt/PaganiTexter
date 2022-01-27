@@ -1,7 +1,7 @@
-const router = require('express').Router();
-let usersRepo = require("../repos/usersRepo");
+const usersRouter = require('express').Router();
+let usersRepo = require("./usersRepo");
 
-router.get('/users', function (req, res, next) {
+usersRouter.get('/users', function (req, res, next) {
     usersRepo.get(function (data) {
       res.status(200).json({
         "statusText": "OK",
@@ -14,7 +14,7 @@ router.get('/users', function (req, res, next) {
   });
   
   
-router.get('/users/:id', function (req, res, next) {
+usersRouter.get('/users/:id', function (req, res, next) {
     usersRepo.getById(req.params.id, function (data) {
       if (data) {
         res.status(200).json({
@@ -39,7 +39,7 @@ router.get('/users/:id', function (req, res, next) {
   });
   
 
-router.post('/users', function (req, res, next) {
+usersRouter.post('/users', function (req, res, next) {
     usersRepo.insert(req.body, function(data) {
       res.status(201).json({
         "statusText": "Created",
@@ -51,7 +51,7 @@ router.post('/users', function (req, res, next) {
     });
   });
   
-router.put('/users/:id', function(req, res, next){
+usersRouter.put('/users/:id', function(req, res, next){
     usersRepo.update(req.params.id, req.body, function(data){
       if(data){
         res.status(200).json({
@@ -76,4 +76,4 @@ router.put('/users/:id', function(req, res, next){
   });
 
 
-module.exports = router;
+module.exports = usersRouter;
