@@ -1,5 +1,8 @@
 package com.example.loginappexample.database
 
+import io.ktor.client.*
+import io.ktor.client.engine.cio.*
+
 class FakeDataBase : DataBase {
     private var users = ArrayList<DbUser>()
 
@@ -9,6 +12,7 @@ class FakeDataBase : DataBase {
     }
 
     override fun login(email: String, password: String): DbResult<DbLoginErrorsRapport> {
+        val httpClient: HttpClient = HttpClient(CIO)
         val user = findUserByEmail(email) ?: return DbResult.Error(DbLoginErrorsRapport("Email doesn't exist", LOGIN_WRONG_PASSWORD_OR_EMAIL))
         if(user.password != password) return DbResult.Error(DbLoginErrorsRapport("Wrong password", LOGIN_WRONG_PASSWORD_OR_EMAIL))
         return DbResult.Success(user)

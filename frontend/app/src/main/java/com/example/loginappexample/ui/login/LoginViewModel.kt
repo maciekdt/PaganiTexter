@@ -1,14 +1,21 @@
 package com.example.loginappexample.ui.login
 
+import android.os.Build
 import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import android.util.Patterns
+import androidx.annotation.RequiresApi
+import androidx.lifecycle.viewModelScope
 import com.example.loginappexample.data.LoginRepository
 import com.example.loginappexample.data.Result
 
 import com.example.loginappexample.R
+import com.example.loginappexample.service.Client
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
+import kotlinx.coroutines.runBlocking
 
 class LoginViewModel(private val loginRepository: LoginRepository) : ViewModel() {
 
@@ -20,6 +27,7 @@ class LoginViewModel(private val loginRepository: LoginRepository) : ViewModel()
 
     fun login(username: String, password: String) {
         // can be launched in a separate asynchronous job
+        sendRequest()
         val result = loginRepository.login(username, password)
 
         if (result is Result.Success) {
@@ -41,6 +49,14 @@ class LoginViewModel(private val loginRepository: LoginRepository) : ViewModel()
         }
     }
 
+    @RequiresApi(Build.VERSION_CODES.O)
+    private fun sendRequest() = runBlocking{
+        val client: Client = Client()
+        launch{
+            client.loginRequest("WojtekTyper", "dupa")
+        }
+    }
+
     // A placeholder username validation check
     private fun isUserNameValid(username: String): Boolean {
         return if (username.contains('@')) {
@@ -54,4 +70,6 @@ class LoginViewModel(private val loginRepository: LoginRepository) : ViewModel()
     private fun isPasswordValid(password: String): Boolean {
         return password.length > 5
     }
+
+
 }

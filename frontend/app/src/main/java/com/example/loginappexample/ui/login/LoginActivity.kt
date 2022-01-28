@@ -18,7 +18,9 @@ import android.widget.Toast
 import com.example.loginappexample.databinding.ActivityLoginBinding
 
 import com.example.loginappexample.R
+import com.example.loginappexample.service.Client
 import com.example.loginappexample.ui.register.RegisterActivity
+import kotlinx.coroutines.Dispatchers
 
 class LoginActivity : AppCompatActivity() {
 
@@ -36,8 +38,10 @@ class LoginActivity : AppCompatActivity() {
         val passwordEditText = binding.password
         val loginButton = binding.login
         val registerButton = binding.register
+        val forgetPassButton = binding.button3
         val loginInfoText = binding.loginResultInfo
         val loadingProgressBar = binding.loading
+
 
 
         loginViewModel = ViewModelProvider(this, LoginViewModelFactory())[LoginViewModel::class.java]
@@ -98,6 +102,10 @@ class LoginActivity : AppCompatActivity() {
         registerButton.setOnClickListener {
             val intent = Intent(this, RegisterActivity::class.java)
             startActivity(intent)
+        }
+
+        forgetPassButton.setOnClickListener {
+            //LoginViewModel.
         }
     }
 
