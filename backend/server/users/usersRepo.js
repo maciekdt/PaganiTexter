@@ -13,6 +13,18 @@ let usersRepo = {
         }
       });
   },
+
+  getByName: function (name, resolve, reject) {
+    fs.readFile(FILE_NAME, function (err, data) {
+      if (err) {
+        reject(err);
+      }
+      else {
+        let user = JSON.parse(data).find(u => u.name == name);
+        resolve(user);
+      }
+    });
+},
   
   getById: function (id, resolve, reject) {
     fs.readFile(FILE_NAME, function (err, data) {

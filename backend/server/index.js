@@ -31,5 +31,5 @@ app.use(errorHelper.errorHandler);
 
 var server = app.listen(5000, function () {
   console.log('Node server is running on http://localhost:5000..');
-  // lt --port 3000 --subdomain hello 
+  // lt --port 5000 --subdomain maciekdt 
 });

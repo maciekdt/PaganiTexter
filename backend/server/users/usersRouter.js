@@ -1,13 +1,26 @@
 const usersRouter = require('express').Router();
 let usersRepo = require("./usersRepo");
+let auth = require('basic-auth')
 
 usersRouter.get('/users', function (req, res, next) {
-    usersRepo.get(function (data) {
-      res.status(200).json({
-        "statusText": "OK",
-        "message": "All users retrieved",
-        "data": data
-      });
+    usersRepo.getByName(auth(req).name, function (data) {
+      if(data){
+        res.status(200).json({
+          "statusText": "OK",
+          "message": "Single user retrieved",
+          "data": data
+        });
+      }
+      else {
+        res.status(404).send({
+          "statusText": "Not Found",
+          "message": "The user '" + auth(req).name + "' could not be found",
+          "error": {
+            "code": "NOT_FOUND",
+            "message": "The user '" + auth(req).name + "' could not be found"
+          }
+        });
+      }
     }, function (err) {
       next(err);
     });
