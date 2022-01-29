@@ -13,7 +13,7 @@ app.use(function(req, res, next){
     }
     else{
       res.status(401).json({
-        "statusText": "Not Authorized",
+        "code": "NOT_AUTHORIZED",
         "message": "User not authorized, wrong password or login"
       })
     }

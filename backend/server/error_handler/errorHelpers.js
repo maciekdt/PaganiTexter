@@ -36,15 +36,8 @@ let errorHelpers = {
   },
   errorBuilder: function (err) {
     return {
-      "status": 500,
-      "statusText": "Internal Server Error",
-      "message": err.message,
-      "error": {
-        "errno": err.errno,
-        "call": err.syscall,
-        "code": "INTERNAL_SERVER_ERROR",
-        "message": err.message
-      }
+      "code": "INTERNAL_SERVER_ERROR",
+      "message": err.message
     };
   }
 };
