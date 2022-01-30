@@ -10,9 +10,8 @@ import androidx.annotation.RequiresApi
 import androidx.lifecycle.viewModelScope
 import com.example.loginappexample.data.LoginRepository
 import com.example.loginappexample.data.Result
-
 import com.example.loginappexample.R
-import com.example.loginappexample.service.Client
+import com.example.loginappexample.service.LoginClient
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.runBlocking
@@ -51,7 +50,7 @@ class LoginViewModel(private val loginRepository: LoginRepository) : ViewModel()
 
     @RequiresApi(Build.VERSION_CODES.O)
     private fun sendRequest() = runBlocking{
-        val client: Client = Client()
+        val client: LoginClient = LoginClient()
         launch{
             client.loginRequest("WojtekTyper", "dupa")
         }

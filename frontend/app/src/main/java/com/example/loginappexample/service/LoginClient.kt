@@ -14,7 +14,7 @@ import io.ktor.client.statement.*
 import io.ktor.http.*
 import java.util.*
 
-class Client {
+class LoginClient {
 
     private val subdomain = "https://maciekdt.loca.lt"
 
@@ -27,7 +27,7 @@ class Client {
 
 
     @RequiresApi(Build.VERSION_CODES.O)
-    suspend fun loginRequest(name:String, password:String){
+    suspend fun loginRequest(name:String, password:String): RequestResult<BasicUsersData, ResponseState>{
         val route = "/api/users/"
         val response:HttpResponse = client.get(subdomain + route){
             method = HttpMethod.Get
@@ -35,10 +35,21 @@ class Client {
                 append(HttpHeaders.Authorization, encodeAuthHeader(name, password))
             }
         }
-        val data:LoginResponseData = response.receive()
-        Log.i("MyInfo", "Response status : " + response.status.toString())
-        Log.i("MyInfo", "Response body : " + data.toString())
-        //client.close()
+        return createResult(response)
+    }
+
+    private suspend fun createResult(response:HttpResponse):RequestResult<BasicUsersData, ResponseState>{
+        if(response.status.value == 200) {
+            val userData:BasicUsersData = response.receive()
+            Log.i("MyInfo", "Response body : $userData")
+            return RequestResult.Success(userData)
+        }
+        else if(response.status.value == 404 || response.status.value == 500){
+            val state:ResponseState = response.receive()
+            Log.i("MyInfo", "Response state : $state")
+            return RequestResult.Error(state)
+        }
+        return RequestResult.Error(ResponseState("UNKNOWN", "Unknown error"))
     }
 
     @RequiresApi(Build.VERSION_CODES.O)
