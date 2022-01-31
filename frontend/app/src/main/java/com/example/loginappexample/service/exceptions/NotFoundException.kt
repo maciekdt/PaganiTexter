@@ -1,4 +1,3 @@
 package com.example.loginappexample.service.exceptions
 
-class NotFoundException {
-}
+class NotFoundException(message:String): Exception(message)

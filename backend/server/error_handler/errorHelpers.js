@@ -19,15 +19,8 @@ let errorHelpers = {
 
 
   errorHandler: function (err, req, res, next) {
-    res.status(500).json(errorHelpers.errorBuilder(err));
+    res.status(500).send();
   },
-
-  errorBuilder: function (err) {
-    return {
-      "code": "INTERNAL_SERVER_ERROR",
-      "message": err.message
-    };
-  }
 };
 
 module.exports = errorHelpers;

@@ -1,7 +1,7 @@
 package com.example.loginappexample.data
 
 import com.example.loginappexample.data.model.LoggedInUser
-import com.example.loginappexample.database.DbLoginErrorsRapport
+import com.example.loginappexample.service.BasicUsersData
 
 /**
  * Class that requests authentication and DbUser information from the remote data source and
@@ -27,12 +27,9 @@ class LoginRepository(private val dataSource: LoginDataSource) {
         dataSource.logout()
     }
 
-    fun login(username: String, password: String): Result<LoggedInUser, DbLoginErrorsRapport> {
-        val result = dataSource.login(username, password)
-        if (result is Result.Success) {
-            setLoggedInUser(result.data)
-        }
-        return result
+    suspend fun login(username: String, password: String): BasicUsersData {
+        return dataSource.login(username, password)
+
     }
 
     private fun setLoggedInUser(loggedInUser: LoggedInUser?) {

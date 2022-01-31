@@ -1,4 +1,3 @@
 package com.example.loginappexample.service.exceptions
 
-class InternalServerException {
-}
+class InternalServerException(message:String): Exception(message)

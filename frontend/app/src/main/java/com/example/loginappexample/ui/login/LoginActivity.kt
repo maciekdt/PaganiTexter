@@ -18,7 +18,6 @@ import android.widget.Toast
 import com.example.loginappexample.databinding.ActivityLoginBinding
 
 import com.example.loginappexample.R
-import com.example.loginappexample.service.Client
 import com.example.loginappexample.ui.register.RegisterActivity
 import kotlinx.coroutines.Dispatchers
 
@@ -28,6 +27,7 @@ class LoginActivity : AppCompatActivity() {
     private lateinit var binding: ActivityLoginBinding
 
 
+    @SuppressLint("SetTextI18n")
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
@@ -42,7 +42,7 @@ class LoginActivity : AppCompatActivity() {
         val loginInfoText = binding.loginResultInfo
         val loadingProgressBar = binding.loading
 
-
+        loadingProgressBar.visibility = View.GONE
 
         loginViewModel = ViewModelProvider(this, LoginViewModelFactory())[LoginViewModel::class.java]
 
@@ -65,15 +65,13 @@ class LoginActivity : AppCompatActivity() {
 
             loadingProgressBar.visibility = View.GONE
             if (loginResult.error != null) {
-                showLoginFailed(loginResult.error)
                 loginInfoText.error = getString(loginResult.error)
                 loginInfoText.text = getString(loginResult.error)
-                loginButton.isEnabled = false
             }
             if (loginResult.success != null) {
-                updateUiWithUser(loginResult.success)
+                loginInfoText.text = "Logged in"
+                loginInfoText.error = null
             }
-            setResult(Activity.RESULT_OK)
 
             //Complete and destroy login activity once successful
             //finish()
@@ -109,25 +107,9 @@ class LoginActivity : AppCompatActivity() {
         }
     }
 
-    private fun updateUiWithUser(model: LoggedInUserView) {
-        val welcome = getString(R.string.welcome)
-        val username = model.username
-        // TODO : initiate successful logged in experience
-        Toast.makeText(
-            applicationContext,
-            "$welcome $username",
-            Toast.LENGTH_LONG
-        ).show()
-    }
-
-    private fun showLoginFailed(@StringRes errorString: Int) {
-        Toast.makeText(applicationContext, errorString, Toast.LENGTH_SHORT).show()
-    }
 }
 
-/**
- * Extension function to simplify setting an afterTextChanged action to EditText components.
- */
+
 fun EditText.afterTextChanged(afterTextChanged: (String) -> Unit) {
     this.addTextChangedListener(object : TextWatcher {
         override fun afterTextChanged(editable: Editable?) {
