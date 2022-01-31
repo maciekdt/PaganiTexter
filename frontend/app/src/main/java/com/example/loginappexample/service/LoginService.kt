@@ -1,13 +1,12 @@
 package com.example.loginappexample.service
 
+import android.content.res.Resources
 import android.os.Build
 import android.util.Log
 import androidx.annotation.RequiresApi
 import io.ktor.client.*
 import io.ktor.client.call.*
 import io.ktor.client.engine.cio.*
-import io.ktor.client.features.*
-import io.ktor.client.features.get
 import io.ktor.client.features.json.*
 import io.ktor.client.request.*
 import io.ktor.client.statement.*
@@ -27,7 +26,7 @@ class LoginClient {
 
 
     @RequiresApi(Build.VERSION_CODES.O)
-    suspend fun loginRequest(name:String, password:String): RequestResult<BasicUsersData, ResponseState>{
+    suspend fun loginRequest(name:String, password:String): BasicUsersData{
         val route = "/api/users/"
         val response:HttpResponse = client.get(subdomain + route){
             method = HttpMethod.Get
@@ -38,18 +37,15 @@ class LoginClient {
         return createResult(response)
     }
 
-    private suspend fun createResult(response:HttpResponse):RequestResult<BasicUsersData, ResponseState>{
+    private suspend fun createResult(response:HttpResponse):BasicUsersData{
         if(response.status.value == 200) {
-            val userData:BasicUsersData = response.receive()
-            Log.i("MyInfo", "Response body : $userData")
-            return RequestResult.Success(userData)
+            val data:BasicUsersData = response.receive()
+            Log.i("MyInfo", "Response body : $data")
+            return data
         }
-        else if(response.status.value == 404 || response.status.value == 500){
-            val state:ResponseState = response.receive()
-            Log.i("MyInfo", "Response state : $state")
-            return RequestResult.Error(state)
-        }
-        return RequestResult.Error(ResponseState("UNKNOWN", "Unknown error"))
+
+
+
     }
 
     @RequiresApi(Build.VERSION_CODES.O)
