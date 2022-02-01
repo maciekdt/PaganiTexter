@@ -2,7 +2,7 @@ const usersRouter = require('express').Router();
 let usersRepo = require("./usersRepo");
 let auth = require('basic-auth')
 
-usersRouter.get('/users', function (req, res, next) {
+usersRouter.get('/', function (req, res, next) {
     usersRepo.getByName(auth(req).name, 
     function (data) {
       if(data) res.status(200).send(data);
@@ -14,7 +14,7 @@ usersRouter.get('/users', function (req, res, next) {
   });
   
   
-usersRouter.get('/users/:id', function (req, res, next) {
+usersRouter.get('/:id', function (req, res, next) {
     usersRepo.getById(req.params.id, 
     function (data) {
       if (data) res.status(200).send(data);
@@ -26,7 +26,7 @@ usersRouter.get('/users/:id', function (req, res, next) {
   });
   
 
-usersRouter.post('/users', function (req, res, next) {
+usersRouter.post('/', function (req, res, next) {
     usersRepo.insert(req.body, 
     function(data) {
       res.status(201).send();
@@ -36,7 +36,7 @@ usersRouter.post('/users', function (req, res, next) {
     });
   });
   
-usersRouter.put('/users/:id', function(req, res, next){
+usersRouter.put('/:id', function(req, res, next){
     usersRepo.update(req.params.id, req.body, 
     function(data){
       if(data) res.status(200).send();

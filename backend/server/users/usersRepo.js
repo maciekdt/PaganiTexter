@@ -87,7 +87,7 @@ let usersRepo = {
   },
 
 
-  authorize: function(loginData, resolve, reject){
+  authenticate: function(loginData, resolve, reject){
     fs.readFile(FILE_NAME, function(err, data){
       if(err){
         reject(err)
@@ -96,8 +96,7 @@ let usersRepo = {
         let users = JSON.parse(data);
         let user = users.find(u => 
           u.name == loginData.name  &&  u.password == loginData.pass);
-        if(user) resolve(true);
-        else resolve(false);
+        resolve(user);
       }
     });
   }
