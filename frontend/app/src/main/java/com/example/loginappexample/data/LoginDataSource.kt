@@ -7,7 +7,7 @@ import com.example.loginappexample.service.LoginService
 class LoginDataSource {
     private val service = LoginService()
 
-    suspend fun login(name: String, password: String): BasicUsersData {
+    suspend fun login(name: String, password: String): LoggedInUser {
         return service.sendLoginRequest(name, password)
     }
 

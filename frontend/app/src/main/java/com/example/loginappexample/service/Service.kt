@@ -8,6 +8,7 @@ import com.example.loginappexample.service.exceptions.NotFoundException
 import io.ktor.client.*
 import io.ktor.client.engine.cio.*
 import io.ktor.client.features.json.*
+import io.ktor.client.features.json.serializer.*
 import io.ktor.client.statement.*
 import java.util.*
 
@@ -18,7 +19,7 @@ abstract class Service {
 
         @JvmStatic protected val client = HttpClient(CIO){
             install(JsonFeature) {
-                serializer = GsonSerializer()
+                serializer = KotlinxSerializer()
             }
             expectSuccess = false
         }

@@ -1,9 +1,13 @@
 package com.example.loginappexample.data.model
+import kotlinx.serialization.*
 
-/**
- * Data class that captures DbUser information for logged in users retrieved from LoginRepository
- */
+
+@Serializable
 data class LoggedInUser(
-    val userId: String,
-    val username: String
-)
+    val token: String,
+    val userId: String
+){
+    override fun toString(): String {
+        return token
+    }
+}
