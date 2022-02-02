@@ -1,7 +1,6 @@
 package com.example.loginappexample.data
 
 import com.example.loginappexample.data.model.LoggedInUser
-import com.example.loginappexample.service.BasicUsersData
 import com.example.loginappexample.service.LoginService
 
 class LoginDataSource {
