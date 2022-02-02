@@ -25,8 +25,27 @@ class LoginService : Service() {
         }
         if(response.status.value == 200) {
             val data:LoggedInUser = response.receive()
-            Log.i("MyInfo", "Response body : $data")
+            Log.i("MyLogService", "Response body : $data")
             return data
+        }
+        throw getResponseException(response)
+    }
+
+
+    suspend fun sendCheckTokenRequest(token: String): Boolean{
+        val route = "/auth/checkToken"
+        val response:HttpResponse = client.get(subdomain + route){
+            headers {
+                append(HttpHeaders.Authorization, token)
+            }
+        }
+        if(response.status.value == 200){
+            Log.i("MyLogService", "Token is valid")
+            return true
+        }
+        else if(response.status.value == 401){
+            Log.i("MyLogService", "Token is not valid")
+            return false
         }
         throw getResponseException(response)
     }

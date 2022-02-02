@@ -1,40 +1,70 @@
 package com.example.loginappexample.data
 
 import com.example.loginappexample.data.model.LoggedInUser
-import com.example.loginappexample.service.BasicUsersData
-
-/**
- * Class that requests authentication and DbUser information from the remote data source and
- * maintains an in-memory cache of login status and DbUser credentials information.
- */
+import android.content.*
+import android.util.Log
+import com.example.loginappexample.application.GlobalApplication
+import io.ktor.client.features.json.serializer.*
+import kotlinx.serialization.json.DecodeSequenceMode
+import java.io.File
+import java.security.AccessController.getContext
+import kotlinx.serialization.Serializable
+import kotlinx.serialization.decodeFromString
+import kotlinx.serialization.json.Json
+import kotlinx.serialization.encodeToString
+import java.io.IOException
+import java.lang.Exception
+import java.lang.NullPointerException
 
 class LoginRepository(private val dataSource: LoginDataSource) {
 
-    // in-memory cache of the loggedInUser object
     private var user: LoggedInUser? = null
-
-    val isLoggedIn: Boolean
-        get() = user != null
-
-    init {
-        // If DbUser credentials will be cached in local storage, it is recommended it be encrypted
-        // @see https://developer.android.com/training/articles/keystore
-        user = null
-    }
+    private val loggedInUserCacheFileName: String = "logged-in-user-cache"
 
     fun logout() {
         user = null
         dataSource.logout()
     }
 
-    suspend fun login(username: String, password: String): LoggedInUser {
-        return dataSource.login(username, password)
-
+    suspend fun login(username: String, password: String, rememberMe: Boolean): LoggedInUser {
+        val loggedInUser: LoggedInUser = dataSource.login(username, password)
+        setLoggedInUser(loggedInUser, rememberMe)
+        return  loggedInUser
     }
 
-    private fun setLoggedInUser(loggedInUser: LoggedInUser?) {
+    suspend fun loginByCache(): Boolean{
+
+        val loggedInUser: LoggedInUser = getLoggedInUserFromCache() ?: return false
+        return dataSource.checkToken(loggedInUser.token)
+    }
+
+    private fun setLoggedInUser(loggedInUser: LoggedInUser, rememberMe: Boolean) {
         this.user = loggedInUser
-        // If DbUser credentials will be cached in local storage, it is recommended it be encrypted
-        // @see https://developer.android.com/training/articles/keystore
+        if(rememberMe) saveLoggedInUserInCache(loggedInUser)
+    }
+
+    private fun saveLoggedInUserInCache(loggedInUser: LoggedInUser){
+        try {
+            val context = GlobalApplication.getAppContext()
+            val file = File(context.filesDir, loggedInUserCacheFileName)
+            file.writeText(Json.encodeToString(loggedInUser))
+        }
+        catch(e:IOException){
+            e.printStackTrace()
+        }
+        catch(e:NullPointerException){
+            e.printStackTrace()
+        }
+    }
+
+    private fun getLoggedInUserFromCache(): LoggedInUser?{
+        return try{
+            val context = GlobalApplication.getAppContext()
+            val file = File(context.filesDir, loggedInUserCacheFileName)
+            Json.decodeFromString<LoggedInUser>(file.readText())
+        } catch (e:Exception){
+            e.printStackTrace()
+            null
+        }
     }
 }

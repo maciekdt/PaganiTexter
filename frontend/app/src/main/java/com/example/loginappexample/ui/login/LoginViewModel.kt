@@ -30,26 +30,59 @@ class LoginViewModel(private val repo: LoginRepository) : ViewModel() {
     val loginResult: LiveData<LoginResult> = _loginResult
 
 
-    fun login(username: String, password: String){
+    fun login(username: String, password: String, rememberMe: Boolean){
         viewModelScope.launch{
             try {
-                val data = repo.login(username, password)
-                Log.i("MyLoginInfo", "Logged in")
-                _loginResult.value = LoginResult(success = R.string.login_success)
+                if(repo.loginByCache()){
+                    Log.i("MyLogModel", "Logged in by cache")
+                    _loginResult.value = LoginResult(error =  R.string.login_success_cache)
+                }
+                else{
+                    Log.w("MyLogModel", "Invalid token in cache")
+                    val data = repo.login(username, password, rememberMe)
+                    Log.i("MyLogModel", "Logged in")
+                    _loginResult.value = LoginResult(success = R.string.login_success)
+                }
             }
             catch (e : NotAuthorizedException){
-                Log.i("MyLoginInfo", "Not Authorized")
+                Log.e("MyLogModel", "Not Authorized")
                 _loginResult.value = LoginResult(error = R.string.not_authorized_error)
             }
             catch (e : NotFoundException){
-                Log.i("MyLoginInfo", "Not Found")
+                Log.e("MyLogModel", "Not Found")
                 _loginResult.value = LoginResult(error = R.string.not_found_error)
             }
             catch (e : InternalServerException){
-                Log.i("MyLoginInfo", "Internal Server Error")
+                Log.e("MyLogModel", "Internal Server Error")
                 _loginResult.value = LoginResult(error = R.string.internal_server_error)
             }
 
+        }
+    }
+
+    fun loginByCache(){
+        viewModelScope.launch{
+            try {
+                if(repo.loginByCache()){
+                    Log.i("MyLogModel", "Logged in by cache")
+                    _loginResult.value = LoginResult(error =  R.string.login_success_cache)
+                }
+                else{
+                    _loginResult.value = LoginResult(error = R.string.login_error_cache)
+                }
+            }
+            catch (e : NotAuthorizedException){
+                Log.e("MyLogModel", "Not Authorized")
+                _loginResult.value = LoginResult(error = R.string.not_authorized_error)
+            }
+            catch (e : NotFoundException){
+                Log.e("MyLogModel", "Not Found")
+                _loginResult.value = LoginResult(error = R.string.not_found_error)
+            }
+            catch (e : InternalServerException){
+                Log.e("MyLogModel", "Internal Server Error")
+                _loginResult.value = LoginResult(error = R.string.internal_server_error)
+            }
         }
     }
 

@@ -11,6 +11,10 @@ class LoginDataSource {
         return service.sendLoginRequest(name, password)
     }
 
+    suspend fun checkToken(token: String): Boolean{
+        return service.sendCheckTokenRequest(token)
+    }
+
     fun logout() {
         // TODO: revoke authentication
     }

@@ -1,9 +1,11 @@
 package com.example.loginappexample.ui.register
 
+import android.content.Context
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import com.example.loginappexample.R
 import com.example.loginappexample.databinding.ActivityRegisterBinding
+import java.io.File
 
 class RegisterActivity : AppCompatActivity() {
 

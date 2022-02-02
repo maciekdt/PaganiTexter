@@ -1,6 +1,6 @@
 let jwt = require('jsonwebtoken');
 const privateKey = "TQaYFHRCLEE0vrOiVNKZ";
-const expiresTime = "7d";
+const expiresTime = "30s";
 
 
 let tokenHandler = {

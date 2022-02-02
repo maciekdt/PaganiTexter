@@ -38,13 +38,15 @@ class LoginActivity : AppCompatActivity() {
         val passwordEditText = binding.password
         val loginButton = binding.login
         val registerButton = binding.register
-        val forgetPassButton = binding.button3
+        val loginByCacheButton = binding.button3
         val loginInfoText = binding.loginResultInfo
         val loadingProgressBar = binding.loading
+        val rememberMeCheckBox = binding.rememberMe
 
         loadingProgressBar.visibility = View.GONE
 
-        loginViewModel = ViewModelProvider(this, LoginViewModelFactory())[LoginViewModel::class.java]
+        loginViewModel =
+            ViewModelProvider(this, LoginViewModelFactory())[LoginViewModel::class.java]
 
         loginViewModel.loginFormState.observe(this@LoginActivity, Observer {
             val loginState = it ?: return@Observer
@@ -85,16 +87,21 @@ class LoginActivity : AppCompatActivity() {
         }
 
         passwordEditText.afterTextChanged {
-                loginViewModel.loginDataChanged(
-                    usernameEditText.text.toString(),
-                    passwordEditText.text.toString()
-                )
+            loginViewModel.loginDataChanged(
+                usernameEditText.text.toString(),
+                passwordEditText.text.toString()
+            )
         }
 
 
         loginButton.setOnClickListener {
             loadingProgressBar.visibility = View.VISIBLE
-            loginViewModel.login(usernameEditText.text.toString(), passwordEditText.text.toString())
+            loginViewModel.login(
+                usernameEditText.text.toString(),
+                passwordEditText.text.toString(),
+                rememberMeCheckBox.isChecked
+            )
+
         }
 
         registerButton.setOnClickListener {
@@ -102,11 +109,11 @@ class LoginActivity : AppCompatActivity() {
             startActivity(intent)
         }
 
-        forgetPassButton.setOnClickListener {
-            //LoginViewModel.
+        loginByCacheButton.setOnClickListener {
+            loadingProgressBar.visibility = View.VISIBLE
+            loginViewModel.loginByCache()
         }
     }
-
 
     private fun EditText.afterTextChanged(afterTextChanged: (String) -> Unit) {
         this.addTextChangedListener(object : TextWatcher {

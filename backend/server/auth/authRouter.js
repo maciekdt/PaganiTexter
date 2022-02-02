@@ -2,6 +2,7 @@ const authRouter = require('express').Router();
 let baseAuth = require('basic-auth');
 let tokenHandler = require('./tokenHandler');
 let usersRepo = require('../users/usersRepo');
+let auth = require('./authorizator')
 
 
 authRouter.get('/token', function (req, res, next) {
@@ -26,6 +27,10 @@ authRouter.get('/token', function (req, res, next) {
         }
     );
 });
+
+authRouter.get('/checkToken', function(req, res, next){
+    auth.checkToken(req, res, next)
+})
 
 
 module.exports = authRouter;
