@@ -2,11 +2,11 @@
 Android app for texting
 
 Tools used :
-  Frontend :
+  --Frontend :
   - Kotlin for Android
   - KTOR http client
   - kotlinx JSON serializer
-  Backend :
+  --Backend :
   - Node.js
   - express.js REST server
   - JWT for Node.js
