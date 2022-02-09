@@ -15,7 +15,7 @@ import java.util.*
 abstract class Service {
 
     companion object {
-        @JvmStatic protected val subdomain = "https://maciekdt.loca.lt"
+        @JvmStatic protected val subdomain = "https://nasty-eel-43.loca.lt"
 
         @JvmStatic protected val client = HttpClient(CIO){
             install(JsonFeature) {

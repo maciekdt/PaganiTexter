@@ -38,7 +38,7 @@ class LoginActivity : AppCompatActivity() {
         val passwordEditText = binding.password
         val loginButton = binding.login
         val registerButton = binding.register
-        val forgetPassButton = binding.forgetPass
+        val loginByCacheButton = binding.button3
         val loginInfoText = binding.loginResultInfo
         val loadingProgressBar = binding.loading
         val rememberMeCheckBox = binding.rememberMe
@@ -75,10 +75,9 @@ class LoginActivity : AppCompatActivity() {
                 loginInfoText.error = null
             }
 
+            //Complete and destroy login activity once successful
+            //finish()
         })
-
-        loadingProgressBar.visibility = View.VISIBLE
-        loginViewModel.loginByCache()
 
         usernameEditText.afterTextChanged {
             loginViewModel.loginDataChanged(
@@ -108,6 +107,11 @@ class LoginActivity : AppCompatActivity() {
         registerButton.setOnClickListener {
             val intent = Intent(this, RegisterActivity::class.java)
             startActivity(intent)
+        }
+
+        loginByCacheButton.setOnClickListener {
+            loadingProgressBar.visibility = View.VISIBLE
+            loginViewModel.loginByCache()
         }
     }
 
