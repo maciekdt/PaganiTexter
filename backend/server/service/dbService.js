@@ -13,7 +13,6 @@ let dbService = {
       let user = await users.findOne(query);
 
       await client.close();
-      console.log(user);
       await resolve(user)
     }
     catch(err){
@@ -22,7 +21,28 @@ let dbService = {
     finally {
       if(client) await client.close();
     }
+  },
+
+  insertUser: async function(user, resolve, reject){
+    try {
+      if(!client) client = new MongoClient(uri) ;
+      await client.connect();
+      let database = client.db("users");
+      let users = database.collection("auth_users");
+
+      let result = await users.insertOne(user);
+      console.log(`A document was inserted with the _id: ${result.insertedId}`);
+      await client.close();
+      await resolve();
+    }
+    catch(err){
+      reject(err);
+    }
+    finally {
+      await client.close();
+    }
   }
 }
+
 
 module.exports = dbService;
