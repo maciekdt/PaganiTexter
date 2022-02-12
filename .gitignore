@@ -1,1 +1,3 @@
-backend/server/node_modules
+backend/authorization-service/node_modules
+backend/authorization-service/logs
+backend/authorization-service/assets
