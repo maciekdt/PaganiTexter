@@ -1,4 +1,5 @@
 let fs = require("fs");
+let dbService = require("../service/dbService")
 const { resolve } = require("path");
 const FILE_NAME = "./assets/users.json"
 
@@ -87,17 +88,14 @@ let usersRepo = {
   },
 
 
-  authenticate: function(loginData, resolve, reject){
-    fs.readFile(FILE_NAME, function(err, data){
-      if(err){
-        reject(err)
-      }
-      else{
-        let users = JSON.parse(data);
-        let user = users.find(u => 
-          u.name == loginData.name  &&  u.password == loginData.pass);
+  getUserByName: function(name, resolve, reject){
+    dbService.getUser(name, 
+      function(user){
+        console.log(user);
         resolve(user);
-      }
+      },
+      function(err){
+        reject(err);
     });
   }
 };

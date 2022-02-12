@@ -52,3 +52,36 @@ Exception Info: {"status":500,"statusText":"Internal Server Error","message":"EN
 Time/Date: 15:44:52 / 27.01.2022
 Exception Info: {"status":500,"statusText":"Internal Server Error","message":"ENOENT: no such file or directory, open 'C:\\Users\\maciek\\Documents\\PaganiTexter\\backend\\server\\asssets\\users.json'","error":{"errno":-4058,"call":"open","code":"INTERNAL_SERVER_ERROR","message":"ENOENT: no such file or directory, open 'C:\\Users\\maciek\\Documents\\PaganiTexter\\backend\\server\\asssets\\users.json'"},"requestInfo":{"hostname":"localhost","path":"/api/users/1"}}
 
+Time/Date: 13:18:27 / 11.02.2022
+Exception Info: {"message":"Invalid scheme, expected connection string to start with \"mongodb://\" or \"mongodb+srv://\""}
+
+Time/Date: 13:19:39 / 11.02.2022
+Exception Info: {"message":"Invalid scheme, expected connection string to start with \"mongodb://\" or \"mongodb+srv://\"","requestInfo":{"hostname":"localhost","path":"/auth/token"}}
+
+Time/Date: 13:23:10 / 11.02.2022
+Exception Info: {"message":"Invalid scheme, expected connection string to start with \"mongodb://\" or \"mongodb+srv://\"","requestInfo":{"hostname":"localhost","path":"/auth/token"}}
+
+Time/Date: 19:46:30 / 12.02.2022
+Exception Info: {"code":"ERR_OSSL_PEM_NO_START_LINE","message":"error:0909006C:PEM routines:get_name:no start line","requestInfo":{"hostname":"localhost","path":"/auth/token"}}
+
+Time/Date: 19:48:51 / 12.02.2022
+Exception Info: {"code":"ERR_OSSL_PEM_NO_START_LINE","message":"error:0909006C:PEM routines:get_name:no start line","requestInfo":{"hostname":"localhost","path":"/auth/token"}}
+
+Time/Date: 19:50:09 / 12.02.2022
+Exception Info: {"code":"ERR_OSSL_PEM_NO_START_LINE","message":"error:0909006C:PEM routines:get_name:no start line","requestInfo":{"hostname":"localhost","path":"/auth/token"}}
+
+Time/Date: 20:19:27 / 12.02.2022
+Exception Info: {"code":"ERR_OSSL_PEM_NO_START_LINE","message":"error:0909006C:PEM routines:get_name:no start line","requestInfo":{"hostname":"localhost","path":"/auth/token"}}
+
+Time/Date: 20:19:27 / 12.02.2022
+Exception Info: {"code":"ERR_OSSL_PEM_NO_START_LINE","message":"error:0909006C:PEM routines:get_name:no start line","requestInfo":{"hostname":"localhost","path":"/auth/token"}}
+
+Time/Date: 20:19:29 / 12.02.2022
+Exception Info: {"code":"ERR_OSSL_PEM_NO_START_LINE","message":"error:0909006C:PEM routines:get_name:no start line","requestInfo":{"hostname":"localhost","path":"/auth/token"}}
+
+Time/Date: 20:26:03 / 12.02.2022
+Exception Info: {"code":"ERR_OSSL_PEM_NO_START_LINE","message":"error:0909006C:PEM routines:get_name:no start line","requestInfo":{"hostname":"localhost","path":"/auth/token"}}
+
+Time/Date: 20:39:24 / 12.02.2022
+Exception Info: {"code":"ENOENT","message":"ENOENT: no such file or directory, open './keys/private.key'","syscall":"open","path":"./keys/private.key","requestInfo":{"hostname":"localhost","path":"/auth/token"}}
+

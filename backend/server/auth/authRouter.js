@@ -6,14 +6,14 @@ let auth = require('./authorizator')
 
 
 authRouter.get('/token', function (req, res, next) {
-    usersRepo.authenticate(baseAuth(req),
+    usersRepo.getUserByName(baseAuth(req).name,
         function(user){
-            if(user){
-                tokenHandler.getToken(user.id,
+            if(user && user.password == baseAuth(req).pass){
+                tokenHandler.getToken(user._id,
                     function(token){
                         res.status(200).send({
                             "token": token,
-                            "userId": user.id
+                            "userId": user._id
                         });
                     },
                     function(err){
