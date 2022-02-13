@@ -7,14 +7,14 @@ let path = require("path");
 
 
 authRouter.get('/token', function (req, res, next) {
-    usersRepo.getUserByNameAndPass(baseAuth(req).name, baseAuth(req).pass,
-        function(user){
-            if(user){
-                tokenHandler.getToken(user._id,
+    usersRepo.authenticateUser(baseAuth(req),
+        function(userId){
+            if(userId){
+                tokenHandler.getToken(userId,
                     function(token){
                         res.status(200).send({
                             "token": token,
-                            "userId": user._id
+                            "userId": userId
                         });
                     },
                     function(err){
