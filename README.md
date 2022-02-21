@@ -1,6 +1,9 @@
 "#PaganiTexter" 
 Android app for texting
 
+To install modules for Node.js backend authService required npm package manager at least 8.3.2  
+To install Kotlin modules for frontend mobile app required Gradle at least 7.4
+
 Tools used :
   - Kotlin for Android
   - KTOR http client
