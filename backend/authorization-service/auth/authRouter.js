@@ -4,6 +4,7 @@ let tokenHandler = require('./tokenHandler');
 let usersRepo = require('../users/usersRepo');
 let fs = require("fs");
 let path = require("path");
+let codes = require('../errors/exceptionCodes');
 
 
 authRouter.get('/token', function (req, res, next) {
@@ -52,7 +53,11 @@ authRouter.post('/register', function(req, res, next){
             res.status(201).send();
         },
         function(err){
-            next(err);
+            if(err.code == codes.userNameAlreadyUsed || err.code == codes.emailAlreadyUsed){
+                res.status(400).send({
+                    errorCode: err.code
+                })
+            }            else next(err);
     });
 })
 

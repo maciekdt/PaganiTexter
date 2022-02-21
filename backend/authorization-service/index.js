@@ -1,6 +1,6 @@
 let express = require('express');
 let app = express();
-let errorHelper = require('./error_handler/errorHelpers');
+let errorHelper = require('./errors/errorHelpers');
 let authRouter = require('./auth/authRouter');
 
 app.use(express.json());

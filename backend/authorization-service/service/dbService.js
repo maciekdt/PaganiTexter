@@ -1,15 +1,15 @@
 const { MongoClient } = require('mongodb');
+let exceptions = require('../errors/exceptions')
 const uri = "mongodb+srv://maciek:pass@paganitexterauthcluster.lj906.mongodb.net/retryWrites=true&w=majority";
 let client;
 
 let dbService = {
-  getUser: async function(userName, resolve, reject){
+  getUser: async function(query, resolve, reject){
     try {
       if(!client) client = new MongoClient(uri) ;
       await client.connect();
       let database = client.db("users");
       let users = database.collection("auth_users");
-      let query = {name: userName};
       let user = await users.findOne(query);
 
       await client.close();
@@ -30,10 +30,17 @@ let dbService = {
       let database = client.db("users");
       let users = database.collection("auth_users");
 
-      let result = await users.insertOne(user);
-      console.log(`A document was inserted with the _id: ${result.insertedId}`);
+      let userWithSameName = await users.findOne({name: user.name});
+      let userWithSameEmail = await users.findOne({email: user.email});
+
+      if(userWithSameName) reject(exceptions.userAlreadyUsedException())
+      else if(userWithSameEmail) reject(exceptions.emailAlreadyUsedException())
+      else{
+        let result = await users.insertOne(user);
+        console.log(`A document was inserted with the _id: ${result.insertedId}`);
+        await resolve();
+      }
       await client.close();
-      await resolve();
     }
     catch(err){
       reject(err);

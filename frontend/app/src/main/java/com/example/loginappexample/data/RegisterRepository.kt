@@ -1,9 +1,11 @@
 package com.example.loginappexample.data
 
+import com.example.loginappexample.data.model.RegisteredUser
+
 
 class RegisterRepository(private val dataSource: RegisterDataSource) {
 
-    fun register(id:String, username:String, email:String, password:String){
-
+    suspend fun register(registrationData: RegisteredUser){
+        dataSource.register(registrationData)
     }
 }

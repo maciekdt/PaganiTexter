@@ -28,7 +28,7 @@ class LoginService : Service() {
             Log.i("MyLogService", "Response body : $data")
             return data
         }
-        throw getResponseException(response)
+        else throw getResponseException(response)
     }
 
 

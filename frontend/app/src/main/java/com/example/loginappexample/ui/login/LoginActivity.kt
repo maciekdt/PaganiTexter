@@ -74,9 +74,6 @@ class LoginActivity : AppCompatActivity() {
                 loginInfoText.text = "Logged in"
                 loginInfoText.error = null
             }
-
-            //Complete and destroy login activity once successful
-            //finish()
         })
 
         usernameEditText.afterTextChanged {

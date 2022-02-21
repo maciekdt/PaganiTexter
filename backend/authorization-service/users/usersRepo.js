@@ -5,16 +5,16 @@ const saltRounds = 10;
 
 let usersRepo = {
   authenticateUser: function(loginData, resolve, reject){
-    dbService.getUser(loginData.name, 
+    dbService.getUser({name: loginData.name}, 
       function(user){
         if(user){
           bcrypt.compare(loginData.pass, user.password, function(err, result) {
             if(err) reject(err);
             else if(result) resolve(user._id);
-            else resolve(false);
-        });
+            else resolve(null);
+          });
         }
-        else resolve(false);
+        else resolve(null);
       },
       function(err){
         reject(err);

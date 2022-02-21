@@ -4,12 +4,9 @@
     <!-- Strings related to login -->
     <string name="prompt_email">Email</string>
     <string name="prompt_password">Password</string>
-    <string name="action_sign_in">Sign in or register</string>
     <string name="action_sign_in_short">Sign in</string>
-    <string name="welcome">"Welcome !"</string>
     <string name="invalid_username">Not a valid username</string>
     <string name="invalid_password">Password must be >5 characters</string>
-    <string name="login_failed_wrong_pass">"Wrong password or username"</string>
 
     <string name="not_authorized_error">"Wrong password or username "</string>
     <string name="internal_server_error">"Server error, try again later "</string>
@@ -17,4 +14,13 @@
     <string name="login_success">"Logged in by username and password "</string>
     <string name="login_success_cache">"Logged in by token in cache "</string>
     <string name="login_error_cache">"Token in cache not valid "</string>
+
+
+    <!-- Strings related to register -->
+    <string name="register_invalid_username">Username can not be empty</string>
+    <string name="register_invalid_email">Not valid email address</string>
+    <string name="register_invalid_password">Password must be >5 characters</string>
+    <string name="register_invalid_repeat_password">Password is different from the first one</string>
+    <string name="register_username_already_used">Username already used</string>
+    <string name="register_email_already_used">Email already used</string>
 </resources>
