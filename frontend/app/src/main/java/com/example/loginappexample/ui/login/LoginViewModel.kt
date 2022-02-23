@@ -8,6 +8,7 @@ import android.util.Patterns
 import androidx.lifecycle.viewModelScope
 import com.example.loginappexample.data.login.LoginRepository
 import com.example.loginappexample.R
+import com.example.loginappexample.data.model.LoginData
 import com.example.loginappexample.service.exceptions.InternalServerException
 import com.example.loginappexample.service.exceptions.NotAuthorizedException
 import com.example.loginappexample.service.exceptions.NotFoundException
@@ -22,16 +23,16 @@ class LoginViewModel(private val repo: LoginRepository) : ViewModel() {
     val loginResult: LiveData<LoginResult> = _loginResult
 
 
-    fun login(username: String, password: String, rememberMe: Boolean){
+    fun login(loginData: LoginData, rememberMe: Boolean){
         viewModelScope.launch{
             try {
-                if(repo.loginByCache()){
+                if(repo.loginByLocalDataSource()){
                     Log.i("MyLogModel", "Logged in by cache")
                     _loginResult.value = LoginResult(error =  R.string.login_success_cache)
                 }
                 else{
                     Log.w("MyLogModel", "Invalid token in cache")
-                    val data = repo.login(username, password, rememberMe)
+                    val data = repo.loginByRemoteDataSource(loginData, rememberMe)
                     Log.i("MyLogModel", "Logged in")
                     _loginResult.value = LoginResult(success = R.string.login_success)
                 }
@@ -55,7 +56,7 @@ class LoginViewModel(private val repo: LoginRepository) : ViewModel() {
     fun loginByCache(){
         viewModelScope.launch{
             try {
-                if(repo.loginByCache()){
+                if(repo.loginByLocalDataSource()){
                     Log.i("MyLogModel", "Logged in by cache")
                     _loginResult.value = LoginResult(error =  R.string.login_success_cache)
                 }

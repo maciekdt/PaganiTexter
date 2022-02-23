@@ -18,6 +18,7 @@ import android.widget.Toast
 import com.example.loginappexample.databinding.ActivityLoginBinding
 
 import com.example.loginappexample.R
+import com.example.loginappexample.data.model.LoginData
 import com.example.loginappexample.ui.register.RegisterActivity
 import kotlinx.coroutines.Dispatchers
 
@@ -94,8 +95,9 @@ class LoginActivity : AppCompatActivity() {
         loginButton.setOnClickListener {
             loadingProgressBar.visibility = View.VISIBLE
             loginViewModel.login(
-                usernameEditText.text.toString(),
-                passwordEditText.text.toString(),
+                LoginData(
+                    usernameEditText.text.toString(),
+                    passwordEditText.text.toString()),
                 rememberMeCheckBox.isChecked
             )
 

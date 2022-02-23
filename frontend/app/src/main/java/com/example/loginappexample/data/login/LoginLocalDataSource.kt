@@ -10,10 +10,10 @@ import java.io.IOException
 import java.lang.Exception
 import java.lang.NullPointerException
 
-class LoginLocalDataSource{
+class LoginLocalDataSource : ILoginLocalDataSource{
     private val loggedInUserCacheFileName: String = "logged-in-user-cache"
 
-    fun login(): LoggedInUser?{
+    override fun login(): LoggedInUser?{
         return try{
             val context = GlobalApplication.getAppContext()
             val file = File(context.filesDir, loggedInUserCacheFileName)
@@ -24,7 +24,7 @@ class LoginLocalDataSource{
         }
     }
 
-    fun saveUser(user: LoggedInUser){
+    override fun saveUser(user: LoggedInUser){
         try {
             val context = GlobalApplication.getAppContext()
             val file = File(context.filesDir, loggedInUserCacheFileName)

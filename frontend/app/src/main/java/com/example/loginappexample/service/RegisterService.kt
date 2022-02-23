@@ -13,7 +13,7 @@ class RegisterService : Service(){
 
     suspend fun sendRegisterRequest(registrationData: RegisterData){
         val route = "/auth/register"
-        var response: HttpResponse = client.post(subdomain + route){
+        val response: HttpResponse = client.post(subdomain + route){
             contentType(ContentType.Application.Json)
             body = registrationData
         }

@@ -1,16 +1,17 @@
 package com.example.loginappexample.data.login
 
 import com.example.loginappexample.data.model.LoggedInUser
+import com.example.loginappexample.data.model.LoginData
 import com.example.loginappexample.service.LoginService
 
-class LoginRemoteDataSource{
+class LoginRemoteDataSource : ILoginRemoteDataSource{
     private val service = LoginService()
 
-    suspend fun login(name: String, password: String): LoggedInUser {
-        return service.sendLoginRequest(name, password)
+    override suspend fun login(loginData:LoginData): LoggedInUser {
+        return service.sendLoginRequest(loginData.username, loginData.password)
     }
 
-    suspend fun checkToken(token: String): Boolean{
+    override suspend fun checkToken(token: String): Boolean{
         return service.sendCheckTokenRequest(token)
     }
 }

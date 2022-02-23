@@ -1,4 +1,4 @@
-package com.example.loginappexample.data
+package com.example.loginappexample.data.register
 
 import com.example.loginappexample.data.model.RegisterData
 import com.example.loginappexample.service.RegisterService

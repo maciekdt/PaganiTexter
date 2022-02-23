@@ -7,12 +7,12 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.loginappexample.R
-import com.example.loginappexample.data.RegisterRepository
+import com.example.loginappexample.data.register.RegisterRepository
 import com.example.loginappexample.data.model.RegisterData
 import com.example.loginappexample.service.exceptions.*
 import kotlinx.coroutines.launch
 
-class RegisterViewModel(private val repo:RegisterRepository) : ViewModel(){
+class RegisterViewModel(private val repo: RegisterRepository) : ViewModel(){
 
     private val _registerForm = MutableLiveData<RegisterFormState>()
     val registerForm:LiveData<RegisterFormState> = _registerForm

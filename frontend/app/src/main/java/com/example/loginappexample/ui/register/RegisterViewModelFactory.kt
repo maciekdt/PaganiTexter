@@ -2,8 +2,8 @@ package com.example.loginappexample.ui.register
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
-import com.example.loginappexample.data.RegisterDataSource
-import com.example.loginappexample.data.RegisterRepository
+import com.example.loginappexample.data.register.RegisterDataSource
+import com.example.loginappexample.data.register.RegisterRepository
 
 
 class RegisterViewModelFactory : ViewModelProvider.Factory {
