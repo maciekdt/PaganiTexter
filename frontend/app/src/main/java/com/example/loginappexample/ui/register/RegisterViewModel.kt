@@ -8,7 +8,7 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.loginappexample.R
 import com.example.loginappexample.data.RegisterRepository
-import com.example.loginappexample.data.model.RegisteredUser
+import com.example.loginappexample.data.model.RegisterData
 import com.example.loginappexample.service.exceptions.*
 import kotlinx.coroutines.launch
 
@@ -21,7 +21,7 @@ class RegisterViewModel(private val repo:RegisterRepository) : ViewModel(){
     val registerResult:LiveData<RegisterResult> = _registerResult
 
     fun register(data: RegisterFormStateData){
-        val requestData = RegisteredUser(
+        val requestData = RegisterData(
             data.username,
             data.password,
             data.email

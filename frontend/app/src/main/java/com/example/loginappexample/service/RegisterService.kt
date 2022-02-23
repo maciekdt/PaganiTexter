@@ -1,7 +1,6 @@
 package com.example.loginappexample.service
 
-import android.util.Log
-import com.example.loginappexample.data.model.RegisteredUser
+import com.example.loginappexample.data.model.RegisterData
 import com.example.loginappexample.service.exceptions.EmailAlreadyUsedException
 import com.example.loginappexample.service.exceptions.UsernameAlreadyUsedException
 import com.example.loginappexample.service.model.ResponseError
@@ -12,7 +11,7 @@ import io.ktor.http.*
 
 class RegisterService : Service(){
 
-    suspend fun sendRegisterRequest(registrationData: RegisteredUser){
+    suspend fun sendRegisterRequest(registrationData: RegisterData){
         val route = "/auth/register"
         var response: HttpResponse = client.post(subdomain + route){
             contentType(ContentType.Application.Json)

@@ -2,8 +2,9 @@ package com.example.loginappexample.ui.login
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
-import com.example.loginappexample.data.LoginDataSource
-import com.example.loginappexample.data.LoginRepository
+import com.example.loginappexample.data.login.LoginLocalDataSource
+import com.example.loginappexample.data.login.LoginRemoteDataSource
+import com.example.loginappexample.data.login.LoginRepository
 
 /**
  * ViewModel provider factory to instantiate LoginViewModel.
@@ -16,7 +17,8 @@ class LoginViewModelFactory : ViewModelProvider.Factory {
         if (modelClass.isAssignableFrom(LoginViewModel::class.java)) {
             return LoginViewModel(
                 repo = LoginRepository(
-                    dataSource = LoginDataSource()
+                    LoginRemoteDataSource(),
+                    LoginLocalDataSource()
                 )
             ) as T
         }

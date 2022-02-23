@@ -1,8 +1,10 @@
-package com.example.loginappexample
+package com.example.loginappexample.login
 
 import androidx.arch.core.executor.testing.InstantTaskExecutorRule
-import com.example.loginappexample.data.LoginDataSource
-import com.example.loginappexample.data.LoginRepository
+import com.example.loginappexample.R
+import com.example.loginappexample.data.login.LoginLocalDataSource
+import com.example.loginappexample.data.login.LoginRemoteDataSource
+import com.example.loginappexample.data.login.LoginRepository
 import com.example.loginappexample.ui.login.LoginFormState
 import com.example.loginappexample.ui.login.LoginViewModel
 import org.junit.Assert
@@ -19,7 +21,7 @@ class LoginViewModelTest {
 
     @Before
     fun setup(){
-        model = LoginViewModel(LoginRepository(LoginDataSource()))
+        model = LoginViewModel(LoginRepository(LoginRemoteDataSource(), LoginLocalDataSource()))
     }
 
 
@@ -43,5 +45,7 @@ class LoginViewModelTest {
 
         model.loginDataChanged("", "pa")
         Assert.assertEquals(LoginFormState(usernameError = R.string.invalid_username), model.loginFormState.value)
+
+
     }
 }

@@ -1,9 +1,9 @@
-package com.example.loginappexample.data
+package com.example.loginappexample.data.login
 
 import com.example.loginappexample.data.model.LoggedInUser
 import com.example.loginappexample.service.LoginService
 
-class LoginDataSource {
+class LoginRemoteDataSource{
     private val service = LoginService()
 
     suspend fun login(name: String, password: String): LoggedInUser {
@@ -13,9 +13,4 @@ class LoginDataSource {
     suspend fun checkToken(token: String): Boolean{
         return service.sendCheckTokenRequest(token)
     }
-
-    fun logout() {
-        // TODO: revoke authentication
-    }
-
 }

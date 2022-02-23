@@ -1,25 +1,17 @@
 package com.example.loginappexample.ui.login
 
-import android.os.Build
 import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import android.util.Patterns
-import android.widget.Toast
-import androidx.annotation.RequiresApi
 import androidx.lifecycle.viewModelScope
-import com.example.loginappexample.data.LoginRepository
-import com.example.loginappexample.data.Result
+import com.example.loginappexample.data.login.LoginRepository
 import com.example.loginappexample.R
-import com.example.loginappexample.data.LoginDataSource
-import com.example.loginappexample.service.LoginService
 import com.example.loginappexample.service.exceptions.InternalServerException
 import com.example.loginappexample.service.exceptions.NotAuthorizedException
 import com.example.loginappexample.service.exceptions.NotFoundException
-import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
-import kotlinx.coroutines.runBlocking
 
 class LoginViewModel(private val repo: LoginRepository) : ViewModel() {
 
@@ -98,7 +90,6 @@ class LoginViewModel(private val repo: LoginRepository) : ViewModel() {
 
 
 
-    // A placeholder username validation check
     private fun isUserNameValid(username: String): Boolean {
         return if (username.contains('@')) {
             Patterns.EMAIL_ADDRESS.matcher(username).matches()
@@ -107,7 +98,6 @@ class LoginViewModel(private val repo: LoginRepository) : ViewModel() {
         }
     }
 
-    // A placeholder password validation check
     private fun isPasswordValid(password: String): Boolean {
         return password.length > 3
     }
