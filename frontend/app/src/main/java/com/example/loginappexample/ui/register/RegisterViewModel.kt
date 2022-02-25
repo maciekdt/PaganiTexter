@@ -29,24 +29,24 @@ class RegisterViewModel(private val repo: RegisterRepository) : ViewModel(){
         viewModelScope.launch{
             try{
                 repo.register(requestData)
+                _registerResult.value = RegisterResult(success = R.string.register_success)
                 Log.i("MyLogModel", "User registered")
             }
-            catch (e : NotAuthorizedException){
-                Log.e("MyLogModel", "Not Authorized")
-            }
-            catch (e : NotFoundException){
-                Log.e("MyLogModel", "Not Found")
-            }
             catch (e : InternalServerException){
+                _registerResult.value = RegisterResult(error = R.string.register_server_error)
                 Log.e("MyLogModel", "Internal Server Error")
             }
             catch (e : EmailAlreadyUsedException){
+                _registerResult.value = RegisterResult(
+                    error = R.string.register_invalid_data,
+                    emailError = R.string.register_email_already_used)
                 Log.e("MyLogModel", "Email already used")
-                _registerResult.value = RegisterResult(error = R.string.register_email_already_used)
             }
             catch (e : UsernameAlreadyUsedException){
+                _registerResult.value = RegisterResult(
+                    error = R.string.register_invalid_data,
+                    usernameError = R.string.register_username_already_used)
                 Log.e("MyLogModel", "Username already used")
-                _registerResult.value = RegisterResult(error = R.string.register_username_already_used)
             }
 
         }

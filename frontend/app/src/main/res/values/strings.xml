@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">Pagani Texter</string>
+    <string name="app_name" translatable="false">Pagani Texter</string>
 
     <!-- Strings related to login -->
     <string name="prompt_email">Email</string>
@@ -23,4 +23,7 @@
     <string name="register_invalid_repeat_password">Password is different from the first one</string>
     <string name="register_username_already_used">Username already used</string>
     <string name="register_email_already_used">Email already used</string>
+    <string name="register_server_error">Server error, try again later  </string>
+    <string name="register_invalid_data">Invalid register data  </string>
+    <string name="register_success">Registered</string>
 </resources>

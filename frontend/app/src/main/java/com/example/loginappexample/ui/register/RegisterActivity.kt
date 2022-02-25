@@ -5,7 +5,9 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.text.Editable
 import android.text.TextWatcher
+import android.view.View
 import android.widget.EditText
+import android.widget.Toast
 import androidx.core.widget.doAfterTextChanged
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
@@ -33,10 +35,13 @@ class RegisterActivity : AppCompatActivity() {
         val repeatPasswordEditText = binding.repeatPassword
         val registerButton = binding.register
         val agreeCheckBox = binding.agree
+        val loadingProgressBar = binding.registerLoading
+        val registerInfoText = binding.registerResultInfo
 
         registerViewModel =
             ViewModelProvider(this,RegisterViewModelFactory())[RegisterViewModel::class.java]
 
+        loadingProgressBar.visibility = View.GONE
 
         registerViewModel.registerForm.observe(this@RegisterActivity, Observer {
             val registerState = it ?: return@Observer
@@ -59,12 +64,20 @@ class RegisterActivity : AppCompatActivity() {
 
         registerViewModel.registerResult.observe(this@RegisterActivity, Observer {
             val registerResult = it ?: return@Observer
+            loadingProgressBar.visibility = View.GONE
 
-            if(registerResult.error == R.string.register_email_already_used){
-                emailEditText.error = getString(registerResult.error)
+            if(registerResult.error != null) {
+                registerInfoText.error = getString(registerResult.error)
+                registerInfoText.text = getString(registerResult.error)
+
+                if (registerResult.usernameError != null) {
+                    usernameEditText.error = getString(registerResult.usernameError)
+                } else if (registerResult.emailError != null) {
+                    emailEditText.error = getString(registerResult.emailError)
+                }
             }
-            else if(registerResult.error == R.string.register_username_already_used) {
-                emailEditText.error = getString(registerResult.error)
+            else if(registerResult.success != null){
+                Toast.makeText(applicationContext, getString(registerResult.success), Toast.LENGTH_LONG).show()
             }
         })
 
@@ -95,6 +108,7 @@ class RegisterActivity : AppCompatActivity() {
         }
 
         registerButton.setOnClickListener{
+            loadingProgressBar.visibility = View.VISIBLE
             registerViewModel.register(getRegisterData())
         }
 
