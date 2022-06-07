@@ -8,7 +8,7 @@ Tools used :
   - Kotlin for Android
   - KTOR http client
   - kotlinx JSON serializer
-  - MockK mocking library for Kotlin
+  - MocKK mocking library for Kotlin
   - Node.js
   - express.js REST server
   - JWT for Node.js
